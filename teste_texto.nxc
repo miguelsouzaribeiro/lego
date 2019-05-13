@@ -1,0 +1,11 @@
+task main() {
+  // limpa a tela
+  ClearScreen();
+
+  // escreve na tela na posição x, y
+  TextOut( 3, LCD_LINE1, "Texto da linha 1");
+  TextOut( 0, LCD_LINE4, "Ola Miguel");
+
+  // loop infinito
+  while(1) {}
+}
