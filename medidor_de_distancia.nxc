@@ -1,0 +1,18 @@
+#define NEAR 10 // cm
+// FIXME: como definir in e cm?
+
+task main()
+{
+  SetSensorLowspeed(IN_4); // velocidade de amostragem
+
+  // loop infinito de medida
+  while(true){
+    int distancia = SensorUS(IN_4);
+
+    // limpa a tela e escreve distancia
+    ClearScreen();
+    TextOut( 0, LCD_LINE1, "Distancia em cm");
+    NumOut( 0, LCD_LINE4, distancia);
+    Wait (1000);
+  }
+}

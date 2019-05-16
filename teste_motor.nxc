@@ -1,10 +1,11 @@
 task main()
 {
-	OnFwd( OUT_A, 30 );
-	OnFwd( OUT_C, 50 );
-	Wait( 4000);
-	Off( OUT_A );
-	OnRev( OUT_C, 30 );
-	Wait( 4000 );
+	//OnFwd( OUT_BC, 50 );
+	//Wait( 5000);
+	OnFwd( OUT_B, 70 );
+	OnRev( OUT_C, 70 );
+	Wait( 2100 );
+	//OnFwd( OUT_BC, 50 );
+	//Wait( 5000);
 	Off( OUT_AC );
 }

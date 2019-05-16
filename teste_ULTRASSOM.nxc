@@ -1,0 +1,21 @@
+#define NEAR 15 // cm
+// FIXME: como definir in e cm?
+
+task main()
+{
+	SetSensorLowspeed(IN_4); // velocidade de amostragem
+
+	// anda pra frente em loop infinito
+	while(true){
+		OnFwd(OUT_BC,50);
+
+		// enquanto a distancia for maior que NEAR (perto) não faça nada
+		while(SensorUS(IN_4)>NEAR) {
+		}
+
+		// quando a distancia for menor ou igual a NEAR pare e volte por 0.8 s
+		Off(OUT_BC);
+		OnRev(OUT_BC,100);
+		Wait(800);
+	}
+}
