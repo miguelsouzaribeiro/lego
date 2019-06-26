@@ -1,0 +1,44 @@
+task main()
+{
+  int counter = 0;
+
+  while( true ) {
+    Wait( SEC_1 );
+    SetSensor( S3, SENSOR_COLORRED );
+    unsigned int vermelho   = Sensor( IN_3 );
+
+    Wait( SEC_1 );
+    SetSensor( S3, SENSOR_COLORGREEN );
+    unsigned int verde   = Sensor( IN_3 );
+
+    Wait( SEC_1 );
+    SetSensor( S3, SENSOR_COLORBLUE );
+    unsigned int azul   = Sensor( IN_3 );
+
+    ClearScreen();
+    TextOut( 0, LCD_LINE1, "Detector de Cor" );
+
+    TextOut( 0, LCD_LINE2, "   Vermelho" );
+    TextOut( 0, LCD_LINE3, "   Verde" );
+    TextOut( 0, LCD_LINE4, "   Azul" );
+    TextOut( 0, LCD_LINE5, "   Contador" );
+
+    NumOut( 0, LCD_LINE2, vermelho );
+    NumOut( 0, LCD_LINE3, verde );
+    NumOut( 0, LCD_LINE4, azul );
+    NumOut( 0, LCD_LINE5, ++counter );
+
+    if( vermelho > verde && vermelho > azul ) {
+      TextOut( 0, LCD_LINE7, "VERMELHO" );
+    }
+    else if( verde > vermelho && verde > azul ) {
+      TextOut( 0, LCD_LINE7, "VERDE" );
+    }
+    else if( azul > vermelho && azul > verde ) {
+      TextOut( 0, LCD_LINE7, "AZUL" );
+    } else {
+      TextOut( 0, LCD_LINE7, "OUTRA COR" );
+    }
+  }
+}
+
