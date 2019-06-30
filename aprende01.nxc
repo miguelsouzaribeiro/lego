@@ -1,0 +1,98 @@
+int comandos[];
+int quantidadeDeComandos = 0;
+int maximoDeComandos = 8;
+
+sub motorAFrente()
+{
+  RotateMotor(OUT_A, 50, 15);
+}
+
+sub motorBFrente()
+{
+  RotateMotor(OUT_B, 50, 15);
+}
+
+sub motorCFrente()
+{
+  RotateMotor(OUT_C, 50, 15);
+}
+
+sub imprimirComandos()
+{
+  ClearScreen();
+  NumOut(0,LCD_LINE1,comandos[0]);
+  NumOut(0,LCD_LINE2,comandos[1]);
+  NumOut(0,LCD_LINE3,comandos[2]);
+  NumOut(0,LCD_LINE4,comandos[3]);
+  NumOut(0,LCD_LINE5,comandos[4]);
+  NumOut(0,LCD_LINE6,comandos[5]);
+  NumOut(0,LCD_LINE7,comandos[6]);
+  NumOut(0,LCD_LINE8,comandos[7]);
+  Wait(2000);
+}
+
+sub aprenderCoresMock()
+{
+  ArrayInit(comandos, 0, maximoDeComandos );
+  comandos[0] = INPUT_BLUECOLOR;
+  comandos[1] = INPUT_GREENCOLOR;
+  comandos[2] = INPUT_YELLOWCOLOR;
+  imprimirComandos();
+}
+
+sub aprenderCores()
+{
+  ArrayInit(comandos, 0, maximoDeComandos );
+  SetSensorColorFull( S3 );
+  int i;
+
+  for( i=0; i<maximoDeComandos; i++ )
+  {
+    int cor = Sensor(S3);
+    comandos[i] = cor;
+    PlayFileEx( "! Attention.rso", 4, FALSE );
+    Wait( 2000 );
+    imprimirComandos();
+
+
+    /* ClearScreen();
+    TextOut(0, LCD_LINE1, "Saida do sensor");
+    NumOut( 0, LCD_LINE3, Sensor(S3) );
+
+    if (Sensor(S3) == INPUT_BLACKCOLOR) {
+      TextOut(0, LCD_LINE2, "Cor preta");
+    }
+    else if (Sensor(S3) == INPUT_BLUECOLOR){
+      TextOut(0, LCD_LINE2, "Cor azul");
+    }
+    else if (Sensor(S3) == INPUT_GREENCOLOR){
+      TextOut(0, LCD_LINE2,"Cor verde");
+    }
+    else if (Sensor(S3) == INPUT_YELLOWCOLOR){
+      TextOut(0, LCD_LINE2, "Cor amarela");
+    }
+    else if (Sensor(S3) == INPUT_REDCOLOR){
+      TextOut(0, LCD_LINE2,"Cor vermelha");
+    }
+    else if (Sensor(S3) == INPUT_WHITECOLOR){
+      TextOut(0, LCD_LINE2, "Cor branca");
+    }
+    else{
+      TextOut(0, LCD_LINE2, "Cor indefinida!");
+    }
+    Wait(1000); */
+  }
+}
+
+
+sub executarOQueFoiAprendido()
+{
+
+}
+
+task main()
+{
+  aprenderCoresMock();
+  // aprenderCores();
+  executarOQueFoiAprendido();
+}

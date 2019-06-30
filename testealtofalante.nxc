@@ -1,0 +1,7 @@
+task main()
+{
+  while( true ) {
+    PlayFileEx( "vermelho.rso", 4, FALSE );
+    Wait( 2000 );
+  }
+}

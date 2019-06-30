@@ -1,0 +1,74 @@
+task main()
+{
+  int counter = 0;
+
+  while( true ) {
+    Wait( SEC_1 );
+    SetSensor( S3, SENSOR_COLORRED );
+    unsigned int vermelho   = Sensor( IN_3 );
+
+    Wait( SEC_1 );
+    SetSensor( S3, SENSOR_COLORGREEN );
+    unsigned int verde   = Sensor( IN_3 );
+
+    Wait( SEC_1 );
+    SetSensor( S3, SENSOR_COLORBLUE );
+    unsigned int azul   = Sensor( IN_3 );
+
+    ClearScreen();
+    TextOut( 0, LCD_LINE1, "Detector de Cor" );
+
+    TextOut( 0, LCD_LINE2, "   Criado" );
+    TextOut( 0, LCD_LINE3, "   por" );
+    TextOut( 0, LCD_LINE2, "   Miguel" );
+
+
+    NumOut( 0, LCD_LINE2, vermelho );
+    NumOut( 0, LCD_LINE3, verde );
+    NumOut( 0, LCD_LINE4, azul );
+    NumOut( 0, LCD_LINE5, ++counter );
+
+    if( vermelho > verde && vermelho > azul ) {
+      // TextOut( 0, LCD_LINE7, "VERMELHO" );
+      PlayFileEx("!vermelho.mp3",MAXVOL,FALSE);
+    }
+    else if( verde > vermelho && verde > azul ) {
+      TextOut( 0, LCD_LINE7, "VERDE" );
+      PlayFileEx("!verde.mp3",MAXVOL,FALSE);
+    }
+    else if( azul > vermelho && azul > verde ) {
+      TextOut( 0, LCD_LINE7, "AZUL" );
+      PlayFileEx("!azul.mp3",MAXVOL,FALSE);
+    } else {
+      TextOut( 0, LCD_LINE7, "OUTRA COR" );
+      PlayFileEx("!outracor.mp3",MAXVOL,FALSE);
+    }
+    #define NEAR 15 // cm
+    // FIXME: como definir in e cm?
+
+    task main()
+    {
+      SetSensorLowspeed(IN_4); // velocidade de amostragem
+
+      // anda pra frente em loop infinito
+      while(true){
+        OnFwd(OUT_C,50);
+
+        // enquanto a distancia for maior que NEAR (perto) não faça nada
+        while(SensorUS(IN_4)>NEAR) {
+        }
+
+        // quando a distancia for menor ou igual a NEAR pare e volte por 0.8 s
+        Off(OUT_C);
+        OnRev(OUT_C,100);
+        Wait(800);
+      }
+    }
+  }
+//  SetSensorTouch(IN_1);
+//  RotateMotor(OUT_B,0);
+//  while (true){
+  //  if (SENSOR_1 == 1) {
+  //    RotateMotor(OUT_B,)
+  }
+}

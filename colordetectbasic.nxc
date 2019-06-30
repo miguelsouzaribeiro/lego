@@ -1,0 +1,32 @@
+task main() {
+  SetSensorColorFull( S3 );
+
+  while (true) {
+    ClearScreen();
+    TextOut(0, LCD_LINE1, "Saida do sensor");
+    NumOut( 0, LCD_LINE3, Sensor(S3) );
+
+    if (Sensor(S3) == INPUT_BLACKCOLOR) {
+      TextOut(0, LCD_LINE2, "Cor preta");
+    }
+    else if (Sensor(S3) == INPUT_BLUECOLOR){
+      TextOut(0, LCD_LINE2, "Cor azul");
+    }
+    else if (Sensor(S3) == INPUT_GREENCOLOR){
+      TextOut(0, LCD_LINE2,"Cor verde");
+    }
+    else if (Sensor(S3) == INPUT_YELLOWCOLOR){
+      TextOut(0, LCD_LINE2, "Cor amarela");
+    }
+    else if (Sensor(S3) == INPUT_REDCOLOR){
+      TextOut(0, LCD_LINE2,"Cor vermelha");
+    }
+    else if (Sensor(S3) == INPUT_WHITECOLOR){
+      TextOut(0, LCD_LINE2, "Cor branca");
+    }
+    else{
+      TextOut(0, LCD_LINE2, "Cor indefinida!");
+    }
+    Wait(200);
+  }
+}
