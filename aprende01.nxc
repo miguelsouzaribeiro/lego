@@ -1,6 +1,6 @@
 int comandos[];
 int quantidadeDeComandos = 0;
-int maximoDeComandos = 8;
+int maximoDeComandos = 9;
 
 sub motorAFrente()
 {
@@ -37,6 +37,13 @@ sub aprenderCoresMock()
   comandos[0] = INPUT_BLUECOLOR;
   comandos[1] = INPUT_GREENCOLOR;
   comandos[2] = INPUT_YELLOWCOLOR;
+  comandos[3] = INPUT_BLUECOLOR;
+  comandos[4] = INPUT_GREENCOLOR;
+  comandos[5] = INPUT_YELLOWCOLOR;
+  comandos[6] = INPUT_BLUECOLOR;
+  comandos[7] = INPUT_GREENCOLOR;
+  comandos[8] = INPUT_YELLOWCOLOR;
+
   imprimirComandos();
 }
 
@@ -53,46 +60,39 @@ sub aprenderCores()
     PlayFileEx( "! Attention.rso", 4, FALSE );
     Wait( 2000 );
     imprimirComandos();
-
-
-    /* ClearScreen();
-    TextOut(0, LCD_LINE1, "Saida do sensor");
-    NumOut( 0, LCD_LINE3, Sensor(S3) );
-
-    if (Sensor(S3) == INPUT_BLACKCOLOR) {
-      TextOut(0, LCD_LINE2, "Cor preta");
-    }
-    else if (Sensor(S3) == INPUT_BLUECOLOR){
-      TextOut(0, LCD_LINE2, "Cor azul");
-    }
-    else if (Sensor(S3) == INPUT_GREENCOLOR){
-      TextOut(0, LCD_LINE2,"Cor verde");
-    }
-    else if (Sensor(S3) == INPUT_YELLOWCOLOR){
-      TextOut(0, LCD_LINE2, "Cor amarela");
-    }
-    else if (Sensor(S3) == INPUT_REDCOLOR){
-      TextOut(0, LCD_LINE2,"Cor vermelha");
-    }
-    else if (Sensor(S3) == INPUT_WHITECOLOR){
-      TextOut(0, LCD_LINE2, "Cor branca");
-    }
-    else{
-      TextOut(0, LCD_LINE2, "Cor indefinida!");
-    }
-    Wait(1000); */
   }
 }
 
 
 sub executarOQueFoiAprendido()
 {
-
+  int i;
+  for( i=0; i<maximoDeComandos; i++ )
+  {
+    switch ( comandos[i] ) {
+      case INPUT_BLUECOLOR:
+        motorAFrente();
+        break;
+      case INPUT_GREENCOLOR:
+        motorBFrente();
+        break;
+      case INPUT_YELLOWCOLOR:
+        motorCFrente();
+        break;
+      default:
+        // nao sei o que fazer com isso
+        PlayFileEx( "! Attention.rso", 4, FALSE );
+        Wait( 2000 );
+        break;
+    }
+  }
 }
 
 task main()
 {
-  aprenderCoresMock();
-  // aprenderCores();
-  executarOQueFoiAprendido();
+  //aprenderCoresMock();
+  aprenderCores();
+  while(true) {
+    executarOQueFoiAprendido();
+  }
 }
