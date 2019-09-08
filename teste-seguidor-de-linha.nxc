@@ -1,5 +1,5 @@
 #define THRESHOLD 40
-task main()
+/*task main()
 {
   SetSensor(IN_3, SENSOR_COLORRED);
   OnFwd(OUT_AC, 75);
@@ -14,4 +14,21 @@ task main()
       OnFwd(OUT_BC, 75);
     }
   }
+}*/
+task main()
+{
+    SetSensor(IN_3, SENSOR_COLORRED);
+     while(true) /* Vamos criar um loop para a acao ser repetida infinitamente*/
+     {
+          if(SensorValue[S3] == 1) /* Quando o sensor identificar preto o robo se movera para a direita*/
+          {
+               motor[motorB] = -5;
+               motor[motorC] = 75;
+          }
+          else if(SensorValue[S3] != 1)/* Quando o sensor identificar uma cor diferente de preto, move para esquerda*/
+          {
+               motor[motorB] = 75;
+               motor[motorC] = -5;
+          }
+     }
 }
