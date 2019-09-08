@@ -8,10 +8,10 @@ task main()
     if (Sensor(IN_3) > THRESHOLD)
     if (Sensor(IN_3) > THRESHOLD)
     {
-      OnRev(OUT_C, 75);
+      OnRev(OUT_BC, 75);
       Wait(100);
       until(Sensor(IN_3) <= THRESHOLD);
-      OnFwd(OUT_AC, 75);
+      OnFwd(OUT_BC, 75);
     }
   }
 }
