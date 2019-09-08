@@ -1,4 +1,4 @@
-#pragma config(Sensor, S3,   ,        sensorCOLORFULL)
+#pragma config(Sensor, S3,sensorCOLORFULL)
 task main()
 {
      while(true) /* Vamos criar um loop para a acao ser repetida infinitamente*/
